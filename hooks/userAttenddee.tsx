@@ -1,7 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetcher, postFetcher } from "@/lib/api";
 
-export function useAttendees(eventId) {
+type AttendeeInput = {
+  name: string;
+  email: string;
+};
+
+export function useAttendees(eventId: string) {
   return useQuery({
     queryKey: ["attendees", eventId],
     queryFn: () => fetcher(`/api/attendees?eventId=${eventId}`),
@@ -9,11 +14,11 @@ export function useAttendees(eventId) {
   });
 }
 
-export function useCreateAttendee(eventId) {
+export function useCreateAttendee(eventId: string) {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (data) =>
+  return useMutation<unknown, Error, AttendeeInput>({
+    mutationFn: (data: AttendeeInput) =>
       postFetcher("/api/attendees", { ...data, eventId }),
 
     onSuccess: () => {

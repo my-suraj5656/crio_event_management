@@ -8,11 +8,19 @@ export function useEvents() {
   });
 }
 
+type EventInput = {
+  title: string;
+  description?: string;
+  date: string;
+  capacity: number;
+};
+
 export function useCreateEvent() {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (data) => postFetcher("/api/events", data),
+  return useMutation<unknown, Error, EventInput>({
+    mutationFn: (data: EventInput) => postFetcher("/api/events", data),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
     },

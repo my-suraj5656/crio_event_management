@@ -50,7 +50,7 @@ export default function AttendeeForm({
 
         form.reset();
       },
-      onError: (error: any) => {
+      onError: (error) => {
         toast.error("Failed to register", {
           description: error.message,
         });
