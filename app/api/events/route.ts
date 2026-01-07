@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
@@ -22,7 +24,6 @@ export async function GET() {
   }
 }
 
-
 // CREATE event
 export async function POST(req: Request) {
   try {
@@ -30,10 +31,7 @@ export async function POST(req: Request) {
     const { title, description, date, capacity } = body;
 
     if (!title || !date || capacity <= 0) {
-      return NextResponse.json(
-        { message: "Invalid input" },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: "Invalid input" }, { status: 400 });
     }
 
     const event = await prisma.event.create({
