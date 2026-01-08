@@ -1,4 +1,4 @@
-export async function fetcher(url) {
+export async function fetcher<T>(url: string): Promise<T> {
   const res = await fetch(url);
 
   if (!res.ok) {
@@ -9,7 +9,10 @@ export async function fetcher(url) {
   return res.json();
 }
 
-export async function postFetcher(url, data) {
+export async function postFetcher<T, D = unknown>(
+  url: string,
+  data: D
+): Promise<T> {
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -2,6 +2,7 @@
 
 import { useAttendees } from "@/hooks/userAttenddee";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { Attendee } from "@/hooks/userAttenddee";
 
 export default function AttendeeList({ eventId }: { eventId: string }) {
   const { data, isLoading, isError } = useAttendees(eventId);
@@ -30,7 +31,7 @@ export default function AttendeeList({ eventId }: { eventId: string }) {
 
   return (
     <ul className="space-y-1">
-      {data.map((attendee: any) => (
+      {data.map((attendee: Attendee) => (
         <li
           key={attendee.id}
           className="border rounded px-3 py-1 text-sm"

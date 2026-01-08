@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function EventList({
   onSelect,
 }: {
-  onSelect: (event: any) => void;
+  onSelect: (event: Event) => void;
 }) {
   const { data, isLoading, isError } = useEvents();
 
